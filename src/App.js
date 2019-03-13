@@ -17,7 +17,7 @@ class Square extends Component{
 
 class Board extends Component{
   renderSquare(i){
-    return <Squar value={i} />;// regresando con función
+    return <Square value={i} />;// regresando con función
   }
 
   render(){
