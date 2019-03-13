@@ -20,14 +20,13 @@ class Board extends Component{
     super(props);
     this.state={
       squares: Array(9).fill(null),
-      isNext:true,//CODE LOGIC
+      isNext:true,
     };
   }
 
   handleClick(i){
     const squares= this.state.squares.slice();
-    squares[i]=this.state.isNext?"X":"O";//code logic
-    alert(squares);
+    squares[i]=this.state.isNext?"X":"O";
     this.setState({squares:squares, isNext:!this.state.isNext});
   }
 
@@ -40,7 +39,12 @@ class Board extends Component{
   }
 
   render(){
-    const status="Next player "+(this.state.isNext?"X":"O");
+    const winner=calculateWinner(this.state.squares);//usando la función
+    let status;
+    if (winner)
+      status="Winner: "+winner;
+    else
+      status="Next player "+(this.state.isNext?"X":"O");
     return(
       <div>
         <div className="status">{status}</div>
@@ -84,4 +88,26 @@ class App extends Component {//Game
   }
 }
 
+
+
+
+function calculateWinner(squares) {//extra función p/ calcular ganadores
+  const lines = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+  for (let i = 0; i < lines.length; i++) {
+    const [a, b, c] = lines[i];
+    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+      return squares[a];
+    }
+  }
+  return null;
+}
 export default App;
