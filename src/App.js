@@ -3,16 +3,13 @@ import logo from './logo.svg';
 import './App.css';
 
 class Square extends Component{
-  constructor(props){// agregué constructor para manipular state
-    super(props);
-    this.state={
-      value:null,
-    };
-  }
+  //Bye, constructor, ya no maneja el estado
   render(){
     return(
-      <button className="square" onClick={()=>{this.setState({value:"X"})}/*La función*/}>
-        {this.state.value/*Ahora no es props, es state*/} 
+      <button 
+          className="square" 
+          onClick={()=> this.props.onClick()/*Llama a la función on click del padre*/}>
+        {this.props.value/*Le llega una prop*/} 
       </button>
       );
   }
@@ -22,8 +19,26 @@ class Square extends Component{
 
 
 class Board extends Component{
+  constructor(props){// board va a manejar ahora el estado,el constructorpasó acá
+    super(props);
+    this.state={
+      squares: Array(9).fill(null),// arreglo, uno para cada cuadrito
+    };
+  }
+
+  handleClick(i){
+    const squares= this.state.squares.slice();
+    squares[i]="X";
+    alert(squares);
+    this.setState({squares:squares});
+  }
+
   renderSquare(i){
-    return <Square value={i} />;
+    return( 
+            <Square value={this.state.squares[i]/*para abajo va a ir props*/}
+              onClick={()=> this.handleClick(i)/*La función avisa cuándo se hizo click, el cuadrito va a llamar esa función*/}
+            />
+            );
   }
 
   render(){
