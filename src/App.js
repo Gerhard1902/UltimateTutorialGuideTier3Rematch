@@ -2,27 +2,24 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-class Square extends Component{
-  //Bye, constructor, ya no maneja el estado
-  render(){
-    return(
+function Square (props){ // function sintax
+  return(
       <button 
           className="square" 
-          onClick={()=> this.props.onClick()/*Llama a la función on click del padre*/}>
-        {this.props.value/*Le llega una prop*/} 
+          onClick={()=> props.onClick()/*Quitar this*/}>
+        {props.value/*Quitar this*/} 
       </button>
-      );
-  }
+  );
 }
 
 
 
 
 class Board extends Component{
-  constructor(props){// board va a manejar ahora el estado,el constructorpasó acá
+  constructor(props){
     super(props);
     this.state={
-      squares: Array(9).fill(null),// arreglo, uno para cada cuadrito
+      squares: Array(9).fill(null),
     };
   }
 
@@ -35,8 +32,8 @@ class Board extends Component{
 
   renderSquare(i){
     return( 
-            <Square value={this.state.squares[i]/*para abajo va a ir props*/}
-              onClick={()=> this.handleClick(i)/*La función avisa cuándo se hizo click, el cuadrito va a llamar esa función*/}
+            <Square value={this.state.squares[i]}
+              onClick={()=> this.handleClick(i)}
             />
             );
   }
