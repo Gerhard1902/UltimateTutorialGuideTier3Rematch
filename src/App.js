@@ -6,15 +6,18 @@ class Square extends Component{
   render(){
     return(
       <button className="square">
-        {/*TODO*/}
+        {this.props.value /*mostrar las props*/} 
       </button>
       );
   }
 }
-class Board extends Component{
 
+
+
+
+class Board extends Component{
   renderSquare(i){
-    return <Square />;
+    return <Squar value={i} />;// regresando con función
   }
 
   render(){
@@ -38,10 +41,13 @@ class Board extends Component{
           {this.renderSquare(8)}
         </div>
       </div>
-
       );
   }
 }
+
+
+
+
 
 class App extends Component {//Game
   render() {
