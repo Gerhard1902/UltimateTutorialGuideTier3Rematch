@@ -3,10 +3,16 @@ import logo from './logo.svg';
 import './App.css';
 
 class Square extends Component{
+  constructor(props){// agregué constructor para manipular state
+    super(props);
+    this.state={
+      value:null,
+    };
+  }
   render(){
     return(
-      <button className="square" onClick={()=>{alert("click")}/*sólo hace alert*/}>
-        {this.props.value} 
+      <button className="square" onClick={()=>{this.setState({value:"X"})}/*La función*/}>
+        {this.state.value/*Ahora no es props, es state*/} 
       </button>
       );
   }
