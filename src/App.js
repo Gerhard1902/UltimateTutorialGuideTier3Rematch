@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-function Square (props){ // function sintax
+function Square (props){
   return(
       <button 
           className="square" 
-          onClick={()=> props.onClick()/*Quitar this*/}>
-        {props.value/*Quitar this*/} 
+          onClick={()=> props.onClick()}>
+        {props.value} 
       </button>
   );
 }
@@ -20,14 +20,15 @@ class Board extends Component{
     super(props);
     this.state={
       squares: Array(9).fill(null),
+      isNext:true,//CODE LOGIC
     };
   }
 
   handleClick(i){
     const squares= this.state.squares.slice();
-    squares[i]="X";
+    squares[i]=this.state.isNext?"X":"O";//code logic
     alert(squares);
-    this.setState({squares:squares});
+    this.setState({squares:squares, isNext:!this.state.isNext});
   }
 
   renderSquare(i){
@@ -39,7 +40,7 @@ class Board extends Component{
   }
 
   render(){
-    const status="Next player X";
+    const status="Next player "+(this.state.isNext?"X":"O");
     return(
       <div>
         <div className="status">{status}</div>
