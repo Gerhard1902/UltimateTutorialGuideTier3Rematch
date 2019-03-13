@@ -5,8 +5,8 @@ import './App.css';
 class Square extends Component{
   render(){
     return(
-      <button className="square">
-        {this.props.value /*mostrar las props*/} 
+      <button className="square" onClick={()=>{alert("click")}/*sólo hace alert*/}>
+        {this.props.value} 
       </button>
       );
   }
@@ -17,7 +17,7 @@ class Square extends Component{
 
 class Board extends Component{
   renderSquare(i){
-    return <Square value={i} />;// regresando con función
+    return <Square value={i} />;
   }
 
   render(){
